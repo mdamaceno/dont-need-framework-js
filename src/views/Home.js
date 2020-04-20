@@ -1,11 +1,12 @@
 import { html, render } from 'lit-html';
 import { component } from 'haunted';
 import '../components/ListPages';
+import '../components/PageTitle';
 
 function Home() {
   return html`
     <c-list-pages></c-list-pages>
-    <h1>Home, sweet Home!</h1>
+    <c-page-title title="Home, sweet home!"></c-page-title>
   `;
 }
 
