@@ -1,15 +1,15 @@
 {
   "name": "dont-need-framework-js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "You can create your app without using any framework like React, Vue, Angular or Svelte.",
+  "main": "src/main.js",
   "scripts": {
     "dev": "rm -rf ./.cache ./dist && parcel ./src/index.html",
     "build": "rm -rf ./.cache ./dist && parcel build ./src/index.html"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Marco Damaceno <maadamaceno@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@vaadin/router": "^1.7.1",
     "haunted": "^4.7.0",
