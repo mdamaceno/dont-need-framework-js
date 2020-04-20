@@ -1,0 +1,21 @@
+{
+  "name": "dont-need-framework-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rm -rf ./.cache ./dist && parcel ./src/index.html",
+    "build": "rm -rf ./.cache ./dist && parcel build ./src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vaadin/router": "^1.7.1",
+    "haunted": "^4.7.0",
+    "lit-html": "^1.2.1"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  }
+}
