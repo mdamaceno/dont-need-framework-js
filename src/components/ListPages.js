@@ -1,4 +1,4 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
 import { component } from 'haunted';
 
 const listPages = [
@@ -9,7 +9,7 @@ const listPages = [
 function ListPages() {
   return html`
     <ul>
-      ${listPages.map(lp => {
+      ${listPages.map((lp) => {
         return html`<li><a href=${lp.uri}>${lp.name}</a></li>`;
       })}
     </ul>
@@ -17,4 +17,3 @@ function ListPages() {
 }
 
 customElements.define('c-list-pages', component(ListPages));
-

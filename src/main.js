@@ -9,4 +9,3 @@ router.setRoutes([
   { path: '/', component: 'x-home' },
   { path: '/about', component: 'x-about' },
 ]);
-

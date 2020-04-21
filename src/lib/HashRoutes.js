@@ -1,7 +1,7 @@
 import { Router } from '@vaadin/router';
 
 export class HashRouter extends Router {
-  __updateBrowserHistory(pathname, replace) {
+  __updateBrowserHistory(pathname) {
     if (window.location.hash.substring(1) !== pathname) {
       window.location.hash = '#' + pathname.pathname;
     }
@@ -9,9 +9,10 @@ export class HashRouter extends Router {
 }
 
 function globalHashChangeHandler(event) {
-  const pathname = event.newURL.indexOf('#') > -1
-    ? event.newURL.substring(event.newURL.indexOf('#') + 1)
-    : '/';
+  const pathname =
+    event.newURL.indexOf('#') > -1
+      ? event.newURL.substring(event.newURL.indexOf('#') + 1)
+      : '/';
   Router.go(pathname);
 }
 
@@ -22,7 +23,7 @@ const HASHCHANGE = {
 
   inactivate() {
     window.removeEventListener('hashchange', globalHashChangeHandler, false);
-  }
+  },
 };
 
 Router.NavigationTrigger = [HASHCHANGE];

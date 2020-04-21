@@ -1,4 +1,4 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
 import { component } from 'haunted';
 import '../components/ListPages';
 import '../components/PageTitle';
@@ -11,4 +11,3 @@ function About() {
 }
 
 customElements.define('x-about', component(About));
-
