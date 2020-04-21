@@ -13,4 +13,6 @@ $ npm install
 $ npm run dev
 ```
 
+Go to `http://localhost:1234` in your browser.
+
 That's it!
