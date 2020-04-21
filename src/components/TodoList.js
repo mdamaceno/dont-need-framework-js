@@ -32,8 +32,10 @@ function TodoList() {
       handleEvent(e) {
         e.preventDefault();
 
-        setTasks((tasks) => [...tasks, { id: uuid(), title: task }]);
-        setTask(() => (task = ''));
+        if (task.trim() !== '') {
+          setTasks((tasks) => [...tasks, { id: uuid(), title: task }]);
+          setTask(() => (task = ''));
+        }
       },
     },
     clearTasks: {
