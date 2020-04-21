@@ -41,6 +41,7 @@ function TodoList() {
         e.preventDefault();
 
         setTasks(() => []);
+        setCompletedTasks(() => []);
       },
     },
     removeTask: {
