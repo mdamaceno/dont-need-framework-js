@@ -70,7 +70,7 @@ function TodoList() {
     },
   };
 
-  const templates = {
+  const fragment = {
     taskList: (tasks) => {
       if (tasks.length) {
         return html`
@@ -124,10 +124,10 @@ function TodoList() {
         </div>
       </form>
       <div>
-        ${templates.taskList(tasks)}
+        ${fragment.taskList(tasks)}
       </div>
       <div>
-        ${templates.completedTasks(completedTasks)}
+        ${fragment.completedTasks(completedTasks)}
       </div>
     </div>
   `;
