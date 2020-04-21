@@ -14,7 +14,8 @@
   "dependencies": {
     "@vaadin/router": "^1.7.1",
     "haunted": "^4.7.0",
-    "lit-html": "^1.2.1"
+    "lit-html": "^1.2.1",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
