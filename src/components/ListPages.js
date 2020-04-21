@@ -4,6 +4,7 @@ import { component } from 'haunted';
 const listPages = [
   { uri: '#/', name: 'Home' },
   { uri: '#/about', name: 'About' },
+  { uri: '#/todo', name: 'Todo' },
 ];
 
 function ListPages() {
