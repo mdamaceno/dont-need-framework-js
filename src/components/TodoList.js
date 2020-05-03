@@ -1,6 +1,5 @@
-import { html } from 'lit-html';
-import { component, useState } from 'haunted';
-import { v4 as uuid } from 'uuid';
+import { html, render } from '../../node_modules/lit-html/lit-html.js';
+import { v4 as uuid } from '../../node_modules/uuid/dist/esm-browser/index.js';
 
 function TodoList() {
   const data = function () {

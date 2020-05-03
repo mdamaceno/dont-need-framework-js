@@ -1,7 +1,7 @@
-import { HashRouter } from './lib/HashRoutes';
-import './views/Home';
-import './views/About';
-import './views/Todo';
+import { HashRouter } from './lib/HashRoutes.js';
+import './views/Home.js';
+import './views/About.js';
+import './views/Todo.js';
 
 const app = document.getElementById('app');
 const router = new HashRouter(app);

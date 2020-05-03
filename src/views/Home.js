@@ -1,7 +1,6 @@
-import { html } from 'lit-html';
-import { component } from 'haunted';
-import '../components/ListPages';
-import '../components/PageTitle';
+import { html, render } from '../../node_modules/lit-html/lit-html.js';
+import '../components/ListPages.js';
+import '../components/PageTitle.js';
 
 function Home() {
   return html`

@@ -1,5 +1,4 @@
-import { html } from 'lit-html';
-import { component } from 'haunted';
+import { html, render } from '../../node_modules/lit-html/lit-html.js';
 
 const listPages = [
   { uri: '#/', name: 'Home' },

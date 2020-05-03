@@ -1,7 +1,7 @@
-import { html } from 'lit-html';
-import { component } from 'haunted';
-import '../components/ListPages';
-import '../components/PageTitle';
+import { html } from 'https://unpkg.com/lit-html?module';
+import { component } from 'https://unpkg.com/haunted/haunted.js';
+import '../components/ListPages.js';
+import '../components/PageTitle.js';
 
 function About() {
   return html`
