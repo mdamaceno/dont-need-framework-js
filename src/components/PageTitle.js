@@ -1,9 +1,28 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
 
-function PageTitle({ title }) {
-  return html`<h1>${title}</h1>`;
+class PageTitle extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  setup() {
+    this.props = {
+      title: this.getAttribute('title'),
+    };
+  }
+
+  template() {
+    return html`<h1>${this.props.title}</h1>`;
+  }
+
+  _render() {
+    render(this.template(), this);
+  }
+
+  connectedCallback() {
+    this.setup();
+    this._render();
+  }
 }
 
-PageTitle.observedAttributes = ['title'];
-
-customElements.define('c-page-title', component(PageTitle));
+customElements.define('c-page-title', PageTitle);

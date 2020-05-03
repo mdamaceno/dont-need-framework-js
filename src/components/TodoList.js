@@ -1,9 +1,10 @@
 import { html, render } from '../../node_modules/lit-html/lit-html.js';
 import { v4 as uuid } from '../../node_modules/uuid/dist/esm-browser/index.js';
 
-function TodoList() {
-  const data = function () {
-    return {
+class TodoList extends HTMLElement {
+  constructor() {
+    super();
+    this.data = {
       tasks: [
         { id: 'fef88a3f-a8ce-4759-80e0-eea65bcdffb2', title: 'Do the dishes' },
         {
@@ -15,124 +16,150 @@ function TodoList() {
       completedTasks: [],
       task: '',
     };
-  };
+  }
 
-  let [tasks, setTasks] = useState(data().tasks);
-  let [completedTasks, setCompletedTasks] = useState(data().completedTasks);
-  let [task, setTask] = useState(data().task);
+  setup() {
+    const _this = this;
 
-  const methods = {
-    newTask: {
-      handleEvent(e) {
-        setTask(() => (task = e.target.value));
+    this.methods = {
+      newTask: {
+        handleEvent(e) {
+          _this.data.task = e.target.value;
+          _this._render();
+        },
       },
-    },
-    addTask: {
-      handleEvent(e) {
-        e.preventDefault();
+      addTask: {
+        handleEvent(e) {
+          e.preventDefault();
 
-        if (task.trim() !== '') {
-          setTasks((tasks) => [...tasks, { id: uuid(), title: task }]);
-          setTask(() => (task = ''));
+          if (_this.data.task.trim() !== '') {
+            _this.data.tasks = [
+              ..._this.data.tasks,
+              { id: uuid(), title: _this.data.task },
+            ];
+            _this.data.task = '';
+            _this._render();
+          }
+        },
+      },
+      clearTasks: {
+        handleEvent(e) {
+          e.preventDefault();
+
+          _this.data.tasks = [];
+          _this.data.completedTasks = [];
+          _this._render();
+        },
+      },
+      removeTask: {
+        handleEvent(e) {
+          e.preventDefault();
+          const id = e.originalTarget.parentNode.dataset.id;
+
+          const foundTask = _this.data.tasks.find((task) => task.id === id);
+
+          if (foundTask) {
+            _this.data.tasks = _this.data.tasks.filter(
+              (task) => task.id !== foundTask.id
+            );
+            _this._render();
+          }
+        },
+      },
+      completeTask: {
+        handleEvent(e) {
+          e.preventDefault();
+          const id = e.originalTarget.parentNode.dataset.id;
+
+          const foundTask = _this.data.tasks.find((task) => task.id === id);
+
+          if (foundTask) {
+            _this.data.completedTasks = [
+              ..._this.data.completedTasks,
+              foundTask,
+            ];
+            _this.data.tasks = _this.data.tasks.filter(
+              (task) => task.id !== foundTask.id
+            );
+            _this._render();
+          }
+        },
+      },
+    };
+
+    this.fragment = {
+      taskList: (tasks) => {
+        if (tasks.length) {
+          return html`
+            <p><strong>Your tasks</strong></p>
+            <ul>
+              ${tasks.map((task) => {
+                return html`<li data-id=${task.id}>
+                  ${task.title}
+                  <button @click=${this.methods.completeTask}>Done</button>
+                  <button @click=${this.methods.removeTask}>x</button>
+                </li>`;
+              })}
+            </ul>
+          `;
+        }
+
+        return 'Wow! You have nothing to do!';
+      },
+      completedTasks: (completedTasks) => {
+        if (completedTasks.length) {
+          return html`
+            <p><strong>Completed tasks</strong></p>
+            <ul>
+              ${completedTasks.map((completedTask) => {
+                return html`<li>${completedTask.title}</li>`;
+              })}
+            </ul>
+          `;
         }
       },
-    },
-    clearTasks: {
-      handleEvent(e) {
-        e.preventDefault();
+    };
+  }
 
-        setTasks(() => []);
-        setCompletedTasks(() => []);
-      },
-    },
-    removeTask: {
-      handleEvent(e) {
-        e.preventDefault();
-        const id = e.originalTarget.parentNode.dataset.id;
-
-        const foundTask = tasks.find((task) => task.id === id);
-
-        if (foundTask) {
-          setTasks((tasks) => tasks.filter((task) => task.id !== foundTask.id));
-        }
-      },
-    },
-    completeTask: {
-      handleEvent(e) {
-        e.preventDefault();
-        const id = e.originalTarget.parentNode.dataset.id;
-
-        const foundTask = tasks.find((task) => task.id === id);
-
-        if (foundTask) {
-          setCompletedTasks((completedTasks) => [...completedTasks, foundTask]);
-          setTasks((tasks) => tasks.filter((task) => task.id !== foundTask.id));
-        }
-      },
-    },
-  };
-
-  const fragment = {
-    taskList: (tasks) => {
-      if (tasks.length) {
-        return html`
-          <p><strong>Your tasks</strong></p>
-          <ul>
-            ${tasks.map((task) => {
-              return html`<li data-id=${task.id}>
-                ${task.title}
-                <button @click=${methods.completeTask}>Done</button>
-                <button @click=${methods.removeTask}>x</button>
-              </li>`;
-            })}
-          </ul>
-        `;
-      }
-
-      return 'Wow! You have nothing to do!';
-    },
-    completedTasks: (completedTasks) => {
-      if (completedTasks.length) {
-        return html`
-          <p><strong>Completed tasks</strong></p>
-          <ul>
-            ${completedTasks.map((completedTask) => {
-              return html`<li>${completedTask.title}</li>`;
-            })}
-          </ul>
-        `;
-      }
-    },
-  };
-
-  return html`
-    <div>
-      <slot name="header">
-        <h2>Default header</h2>
-      </slot>
-      <form @submit=${methods.addTask}>
+  template() {
+    return html`
+      <div>
+        <slot name="header">
+          <h2>Default header</h2>
+        </slot>
+        <form @submit=${this.methods.addTask}>
+          <div>
+            <label for="todo-new-task">Enter a new task</label><br />
+            <input
+              type="text"
+              id="todo-new-task"
+              .value=${this.data.task}
+              @input=${this.methods.newTask}
+            />
+          </div>
+          <div>
+            <button>Add</button>
+            <button @click=${this.methods.clearTasks}>Clear all</button>
+          </div>
+        </form>
         <div>
-          <label for="todo-new-task">Enter a new task</label><br />
-          <input
-            type="text"
-            id="todo-new-task"
-            .value=${task}
-            @input=${methods.newTask}
-          />
+          ${this.fragment.taskList(this.data.tasks)}
         </div>
         <div>
-          <button>Add</button>
-          <button @click=${methods.clearTasks}>Clear all</button>
+          ${this.fragment.completedTasks(this.data.completedTasks)}
         </div>
-      </form>
-      <div>
-        ${fragment.taskList(tasks)}
       </div>
-      <div>
-        ${fragment.completedTasks(completedTasks)}
-      </div>
-    </div>
-  `;
+    `;
+  }
+
+  _render() {
+    render(this.template(), this);
+  }
+
+  connectedCallback() {
+    this.setup();
+    this._render();
+  }
 }
 
-customElements.define('c-todo-list', component(TodoList));
+customElements.define('c-todo-list', TodoList);
