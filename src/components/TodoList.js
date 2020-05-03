@@ -124,9 +124,6 @@ class TodoList extends HTMLElement {
   template() {
     return html`
       <div>
-        <slot name="header">
-          <h2>Default header</h2>
-        </slot>
         <form @submit=${this.methods.addTask}>
           <div>
             <label for="todo-new-task">Enter a new task</label><br />

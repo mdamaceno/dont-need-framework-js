@@ -12,9 +12,7 @@ class Todo extends HTMLElement {
     return html`
       <c-list-pages></c-list-pages>
       <c-page-title title="Todo"></c-page-title>
-      <c-todo-list>
-        <h2 slot="header">Slotted header</h2>
-      </c-todo-list>
+      <c-todo-list></c-todo-list>
     `;
   }
 
