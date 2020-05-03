@@ -2,7 +2,7 @@
   "name": "dont-need-framework-js",
   "version": "1.0.0",
   "description": "You can create your app without using any framework like React, Vue, Angular or Svelte.",
-  "main": "src/main.js",
+  "main": "app.js",
   "scripts": {
     "dev": "browser-sync start --server --files \"src/**/*.js\"",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./index.html ./dist/index.html && rollup ./app --file ./dist/app.js --format iife",
