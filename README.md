@@ -13,6 +13,14 @@ $ npm install
 $ npm run dev
 ```
 
-Go to `http://localhost:1234` in your browser.
+Go to `http://localhost:3000` in your browser.
 
 That's it!
+
+## Contributing
+
+1. Fork it ( <https://github.com/mdamaceno/dont-need-framework-js/fork> )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request

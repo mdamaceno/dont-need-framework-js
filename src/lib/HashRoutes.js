@@ -1,4 +1,4 @@
-import { Router } from '@vaadin/router';
+import { Router } from '../../node_modules/@vaadin/router/dist/vaadin-router.js';
 
 export class HashRouter extends Router {
   __updateBrowserHistory(pathname) {
