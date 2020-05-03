@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "browser-sync start --server --files \"src/**/*.js\"",
     "build": "rm -rf ./dist && mkdir ./dist && cp ./index.html ./dist/index.html && rollup ./app --file ./dist/app.js --format iife",
-    "start:prod": "http-server -p 80 ./dist",
+    "start": "http-server ./dist",
     "lint": "eslint src --ext .js"
   },
   "keywords": [],
