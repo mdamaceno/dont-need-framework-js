@@ -3,11 +3,15 @@ import './views/Home.js';
 import './views/About.js';
 import './views/Todo.js';
 
-const app = document.getElementById('app');
-const router = new HashRouter(app);
+function initApp() {
+  const app = document.getElementById('app');
+  const router = new HashRouter(app);
 
-router.setRoutes([
-  { path: '/', component: 'x-home' },
-  { path: '/about', component: 'x-about' },
-  { path: '/todo', component: 'x-todo' },
-]);
+  router.setRoutes([
+    { path: '/', component: 'x-home' },
+    { path: '/about', component: 'x-about' },
+    { path: '/todo', component: 'x-todo' },
+  ]);
+}
+
+export default initApp;
